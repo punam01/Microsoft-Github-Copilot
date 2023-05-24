@@ -35,7 +35,3 @@ while True:
     else:
         print("Invalid choice")
         continue
-    
-city=input("Enter city name: ")
-ans=get_weather(city)
-print(ans)
