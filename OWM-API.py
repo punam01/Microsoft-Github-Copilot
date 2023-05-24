@@ -2,29 +2,26 @@
 import requests
 import json
 
-def get_weather_icon(code):
-    if code == '01d':
-        return '☀️'  # Sunny
-    elif code == '01n':
-        return '🌙'  # Clear night
-    elif code == '02d' or code == '02n':
-        return '⛅'  # Few clouds
-    elif code == '03d' or code == '03n':
-        return '☁️'  # Scattered clouds
-    elif code == '04d' or code == '04n':
-        return '☁️'  # Broken clouds
-    elif code == '09d' or code == '09n':
-        return '🌧️'  # Rain showers
-    elif code == '10d' or code == '10n':
-        return '🌦️'  # Rain
-    elif code == '11d' or code == '11n':
-        return '⛈️'  # Thunderstorm
-    elif code == '13d' or code == '13n':
-        return '❄️'  # Snow
-    elif code == '50d' or code == '50n':
-        return '🌫️'  # Mist
-    else:
-        return '❓'  # Unknown condition
+weather_icons = {
+    '01d': '☀️',  # Sunny
+    '01n': '🌙',  # Clear night
+    '02d': '⛅',  # Few clouds
+    '02n': '⛅',  # Few clouds
+    '03d': '☁️',  # Scattered clouds
+    '03n': '☁️',  # Scattered clouds
+    '04d': '☁️',  # Broken clouds
+    '04n': '☁️',  # Broken clouds
+    '09d': '🌧️',  # Rain showers
+    '09n': '🌧️',  # Rain showers
+    '10d': '🌦️',  # Rain
+    '10n': '🌦️',  # Rain
+    '11d': '⛈️',  # Thunderstorm
+    '11n': '⛈️',  # Thunderstorm
+    '13d': '❄️',  # Snow
+    '13n': '❄️',  # Snow
+    '50d': '🌫️',  # Mist
+    '50n': '🌫️',  # Mist
+}
 
 def get_weather(city):
     print("Weather forecast for "+city+":\n")
@@ -40,7 +37,7 @@ def get_weather(city):
         current_humidity=y["humidity"]
         z=x["weather"]
         weather_description=z[0]["description"]
-        icon=get_weather_icon(z[0]["icon"])
+        icon=weather_icons[z[0]["icon"]]
         return ("Temperature (in kelvin unit) = " + str(current_temperature)+"\natmospheric pressure (in hPa unit) = "+str(current_pressure)+"\nhumidity (in percentage) = "+str(current_humidity)+"\ndescription = "+str(weather_description)+" "+icon)
     else:
         return "City not found"
