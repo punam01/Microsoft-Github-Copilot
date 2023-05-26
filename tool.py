@@ -3,6 +3,8 @@ import requests
 import json
 import datetime
 from urllib.request import urlopen 
+import os
+from dotenv import load_dotenv
 
 #declare global varibales
 min_temperature=0
@@ -230,9 +232,9 @@ def get_date_time(timestamp):
 
 #function to get weather forecast
 def get_weather(city):
-    print(city)
+    load_dotenv()
     url="https://api.openweathermap.org/data/2.5/weather?"
-    api_key="b0fdaab1648df8b448f07dde33141cec"
+    api_key=os.getenv("API_KEY")
     complete_url=url+"appid="+api_key+"&q="+city
     response=requests.get(complete_url)
     x=response.json()
