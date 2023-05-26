@@ -25,7 +25,9 @@ sunrise=0
 sunset=0
 weather_description=""
 current_city=""
-#make a dictionary of aboce variables
+current_country=""
+
+#make a dictionary of above variables
 weather_data={
     "min_temperature":min_temperature,
     "max_temperature":max_temperature,
@@ -46,7 +48,8 @@ weather_data={
     "sunrise":sunrise,
     "sunset":sunset,
     "weather_description":weather_description,
-    "current_city":current_city
+    "current_city":current_city,
+    "current_country":current_country
 }
     
 #dictionary to store weather icons
@@ -70,6 +73,119 @@ weather_icons = {
     '50d': '🌫️',  # Mist
     '50n': '🌫️',  # Mist
 }
+
+#dictionary for country codes
+country_codes={
+    "AF":"Afghanistan",
+    "AX":"Aland Islands",
+    "AL":"Albania",
+    "DZ":"Algeria",
+    "AS":"American Samoa",
+    "AD":"Andorra",
+    "AO":"Angola",
+    "AI":"Anguilla",
+    "AQ":"Antarctica",
+    "AG":"Antigua And Barbuda",
+    "AR":"Argentina",
+    "AM":"Armenia",
+    "AW":"Aruba",
+    "AU":"Australia",
+    "AT":"Austria",
+    "AZ":"Azerbaijan",
+    "BS":"Bahamas",
+    "BH":"Bahrain",
+    "BD":"Bangladesh",
+    "BB":"Barbados",
+    "BY":"Belarus",
+    "BE":"Belgium",
+    "BZ":"Belize",
+
+    "BJ":"Benin",
+    "BM":"Bermuda",
+    "BT":"Bhutan",
+    "BO":"Bolivia",
+    "BA":"Bosnia And Herzegovina",
+    "BW":"Botswana",
+    "BV":"Bouvet Island",
+    "BR":"Brazil",
+    "IO":"British Indian Ocean Territory",
+    "BN":"Brunei Darussalam",
+    "BG":"Bulgaria",
+    "BF":"Burkina Faso",
+    "BI":"Burundi",
+    "KH":"Cambodia",
+    "CM":"Cameroon",
+    "CA":"Canada",
+    "CV":"Cape Verde",
+    "KY":"Cayman Islands",
+    "CF":"Central African Republic",
+    "TD":"Chad",
+    "CL":"Chile",
+    "CN":"China",
+    "CX":"Christmas Island",
+    "CC":"Cocos (Keeling) Islands",
+    "CO":"Colombia",
+    "KM":"Comoros",
+    "CG":"Congo",
+    "CD":"Congo, Democratic Republic",
+    "CK":"Cook Islands",
+
+
+    "CR":"Costa Rica",
+    "CI":"Cote D'Ivoire",
+    "HR":"Croatia",
+    "CU":"Cuba",
+    "CY":"Cyprus",
+    "CZ":"Czech Republic",
+    "DK":"Denmark",
+    "DJ":"Djibouti",
+    "DM":"Dominica",
+    "DO":"Dominican Republic",
+    "EC":"Ecuador",
+    "EG":"Egypt",
+    "SV":"El Salvador",
+    "GQ":"Equatorial Guinea",
+    "ER":"Eritrea",
+    "EE":"Estonia",
+    "ET":"Ethiopia",
+    "FK":"Falkland Islands (Malvinas)",
+    "FO":"Faroe Islands",
+    "FJ":"Fiji",
+    "FI":"Finland",
+    "FR":"France",
+    "GF":"French Guiana",
+    "PF":"French Polynesia",
+    "TF":"French Southern Territories",
+    "GA":"Gabon",
+    "GM":"Gambia",
+    "GE":"Georgia",
+    "DE":"Germany",
+    "GH":"Ghana",
+    "GI":"Gibraltar",
+    "GR":"Greece",
+    "GL":"Greenland",
+    "GD":"Grenada",
+    "GP":"Guadeloupe",
+    "GU":"Guam",
+    "GT":"Guatemala",
+    "GG":"Guernsey",
+    "GN":"Guinea",
+    "GW":"Guinea-Bissau",
+    "GY":"Guyana",
+    "HT":"Haiti",
+    "HM":"Heard Island & Mcdonald Islands",
+    "VA":"Holy See (Vatican City State)",
+    "HN":"Honduras",
+    "HK":"Hong Kong",
+    "HU":"Hungary",
+    "IS":"Iceland",
+    "IN":"India",
+    "ID":"Indonesia",
+    "IR":"Iran, Islamic Republic Of",
+    "IQ":"Iraq",
+    "IE":"Ireland"
+}
+
 #ditionary to store weather description
 weather_description={
     "clear sky":"A clear sky is a weather condition characterized by an absence of clouds, resulting in a vast expanse of blue overhead. It is a sight that evokes a sense of openness and tranquility. During clear sky conditions, the sun shines brightly, casting a warm and radiant glow over the surroundings.",
@@ -78,6 +194,7 @@ weather_description={
     "broken clouds":"Broken clouds is a weather condition characterized by a sky that is partially covered with clouds. It represents a state where the cloud cover is extensive and fragmented, with significant gaps of clear sky visible between the cloud formations.",
     "shower rain":"Shower rains, also known as showers, refer to a type of precipitation characterized by short-lived bursts of rainfall. Showers are generally brief in duration but can vary in intensity, ranging from light drizzles to heavy downpours. Unlike continuous rainfall, which lasts for an extended period, showers are intermittent and often occur in a scattered or localized pattern.",
     "rain":"Rain is a form of precipitation in which water droplets fall from the atmosphere towards the Earth's surface. It is a vital component of the water cycle and plays a crucial role in sustaining life on our planet.",
+    "moderate rain":"Moderate rain is a type of rainfall characterized by rainfall rates ranging from 2.5 mm to 7.6 mm (0.098 in to 0.299 in) per hour. It is heavier than drizzle but lighter than heavy rain, and falls in the form of small to medium-sized droplets.",
     "thunderstorm":"A thunderstorm is a weather phenomenon characterized by the presence of thunder, lightning, heavy rain, and sometimes gusty winds. It is a powerful and intense atmospheric event that occurs when there are strong updrafts of warm, moist air interacting with cooler air masses.",
     "snow":"Snow is a form of precipitation that occurs when water vapor freezes in the atmosphere and falls to the ground as ice crystals. It is a characteristic feature of colder climates and is associated with freezing temperatures.",
     "mist":"Mist is a weather condition characterized by the presence of tiny water droplets suspended in the air, reducing visibility to some extent. It is a type of atmospheric moisture that forms close to the ground when the air is saturated and near the dew point temperature.",
@@ -130,9 +247,6 @@ def get_weather(city):
         weather_data["current_humidity"]=str(y["humidity"])+" %"
         weather_data["current_unix_time"]=x["dt"]
         weather_data["current_date_time"]=str(get_date_time(weather_data["current_unix_time"]))+" IST"
-        coord=x["coord"]
-        weather_data["longitude"]=str(coord["lon"])
-        weather_data["latitude"]=str(coord["lat"])
         z=x["weather"]
         i=z[0]["icon"]
         weather_data["icon"]=weather_icons[i]        
@@ -143,7 +257,21 @@ def get_weather(city):
         weather_data["sunrise"]=str(get_date_time(x["sys"]["sunrise"]))+" IST"
         weather_data["sunset"]=str(get_date_time(x["sys"]["sunset"]))+" IST"
         weather_data["current_city"]=city
+        coord=x["coord"]
+        if(coord["lon"]>0):
+            weather_data["longitude"]=str(coord["lon"])
+        else:
+            weather_data["longitude"]="Not Available"
+        if(coord["lat"]>0):
+            weather_data["latitude"]=str(coord["lat"])
+        else:
+            weather_data["latitude"]="Not Available"
+        if(x["sys"]["country"] in country_codes):
+            weather_data["current_country"]=country_codes[x["sys"]["country"]]
+        else:
+            weather_data["current_country"]=x["sys"]["country"]
         return weather_data
     else:
-        return "City not found"   
+        print("City not found")
+        return ""  
 
