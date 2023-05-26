@@ -29,6 +29,7 @@ weather_description=""
 current_city=""
 current_country=""
 error=False
+
 #make a dictionary of above variables
 weather_data={
     "min_temperature":min_temperature,
