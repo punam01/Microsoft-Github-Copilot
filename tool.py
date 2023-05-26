@@ -5,7 +5,6 @@ import datetime
 from urllib.request import urlopen 
 import os
 from dotenv import load_dotenv
-    
 #dictionary to store weather icons
 weather_icons = {
     '01d': '☀️',  # Sunny
@@ -340,7 +339,7 @@ weather_data={
     "cod":"", 
     "name":""
 }
-#function to parse weather api with missing data handling
+#function to parse weather api with missing data handling  
 def parse_weather_data(response):
     try:
         weather_data["longitude"]=response.get("coord",{}).get("lon")
@@ -373,8 +372,7 @@ def parse_weather_data(response):
         print("\nWeather data:", weather_data)    
         return weather_data
     except KeyError:
-        print("\nCity Not Found")
-    
+        print("\nCity Not Found")  
 
 #function to get weather forecast
 def get_weather(city):
