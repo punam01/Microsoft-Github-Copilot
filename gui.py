@@ -142,9 +142,7 @@ class App(customtkinter.CTk):
         self.sidebar_Label_8.grid(row=1, column=0, padx=20, pady=10)
 
         self.appearance_mode_optionemenu.set("Dark")
-        self.scaling_optionemenu.set("100%")
-        
-        
+        self.scaling_optionemenu.set("100%")      
 
     def open_input_dialog_event(self):
         dialog = customtkinter.CTkInputDialog(text="Type in a number:", title="CTkInputDialog")
@@ -170,8 +168,7 @@ class App(customtkinter.CTk):
         self.sidebar_Label_6.configure(text=current_weather["current_temperature"])
         self.sidebar_Label_7.configure(text=current_weather["current_date_time"])
         self.sidebar_Label_8.configure(text=current_weather["current_country"])
-
-
+        self.entry.delete(0, END)
 
     def change_scaling_event(self, new_scaling: str):
         new_scaling_float = int(new_scaling.replace("%", "")) / 100

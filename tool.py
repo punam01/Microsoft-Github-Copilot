@@ -28,7 +28,7 @@ sunset=0
 weather_description=""
 current_city=""
 current_country=""
-
+error=False
 #make a dictionary of above variables
 weather_data={
     "min_temperature":min_temperature,
@@ -51,7 +51,8 @@ weather_data={
     "sunset":sunset,
     "weather_description":weather_description,
     "current_city":current_city,
-    "current_country":current_country
+    "current_country":current_country,
+    "error":error
 }
     
 #dictionary to store weather icons
@@ -214,7 +215,8 @@ weather_description={
     "light snow":"Light and gentle snowfall with small accumulation.",
     "moderate snow":"Moderate snowfall with accumulation of 2-5 cm.",
     "heavy snow":"Heavy snowfall with accumulation of 5-10 cm.",
-    "overcast clouds":"Overcast clouds is a weather condition characterized by a sky that is completely covered with clouds. It represents a state where the cloud cover is extensive and continuous, with no gaps of clear sky visible between the cloud formations."
+    "overcast clouds":"Overcast clouds is a weather condition characterized by a sky that is completely covered with clouds. It represents a state where the cloud cover is extensive and continuous, with no gaps of clear sky visible between the cloud formations.",
+    "light rain":"Light rain is a type of rainfall characterized by rainfall rates ranging from 0.25 mm to 1 mm (0.01 in to 0.04 in) per hour. It is lighter than moderate rain but heavier than drizzle, and falls in the form of small to medium-sized droplets.",
 
 }
 #function to get current loaction
@@ -233,12 +235,16 @@ def get_date_time(timestamp):
 #function to get weather forecast
 def get_weather(city):
     load_dotenv()
+    print(city)
     url="https://api.openweathermap.org/data/2.5/weather?"
-    api_key=os.getenv("API_KEY")
+    api_key=str(os.getenv("API_KEY"))
     complete_url=url+"appid="+api_key+"&q="+city
+    print(complete_url)
     response=requests.get(complete_url)
     x=response.json()
-    if x["cod"]!="404":
+    #handle all error and exceprtion in response
+    if x["cod"]=="404" or x["cod"]!="401":
+        print(x)
         y=x["main"]
         weather_data["min_temperature"]=str(y["temp_min"])+ " K"
         weather_data["max_temperature"]=str(y["temp_max"])+" K"
@@ -251,14 +257,18 @@ def get_weather(city):
         weather_data["current_date_time"]=str(get_date_time(weather_data["current_unix_time"]))+" IST"
         z=x["weather"]
         i=z[0]["icon"]
-        weather_data["icon"]=weather_icons[i]        
-        weather_data["weather_description"]=weather_description[str(z[0]["description"])]
+        weather_data["icon"]=weather_icons[i] 
+        if(str(z[0]["description"]) in weather_description.keys()):       
+            weather_data["weather_description"]=weather_description[str(z[0]["description"])]
+        else:
+            weather_data["weather_description"]="Not Available"
         wind=x["wind"]
         weather_data["wind_speed"]=str(wind["speed"])+" m/s"
         weather_data["wind_deg"]=str(wind["deg"])+" deg"
         weather_data["sunrise"]=str(get_date_time(x["sys"]["sunrise"]))+" IST"
         weather_data["sunset"]=str(get_date_time(x["sys"]["sunset"]))+" IST"
         weather_data["current_city"]=city
+        print(x["coord"])
         coord=x["coord"]
         if(coord["lon"]>0):
             weather_data["longitude"]=str(coord["lon"])
@@ -268,12 +278,16 @@ def get_weather(city):
             weather_data["latitude"]=str(coord["lat"])
         else:
             weather_data["latitude"]="Not Available"
-        if(x["sys"]["country"] in country_codes):
-            weather_data["current_country"]=country_codes[x["sys"]["country"]]
+        a=x["sys"]
+        country = a.get("country", "Unknown")
+        if(country!="Unknown"):
+                if(country in country_codes.keys()):
+                    weather_data["current_country"]=country_codes[x["sys"]["country"]]
+                else:
+                    weather_data["current_country"]=country.capitalize()
         else:
-            weather_data["current_country"]=x["sys"]["country"]
+            weather_data["current_country"]=city.capitalize()
         return weather_data
     else:
-        print("City not found")
-        return ""  
+        return "Cannot find city"
 
