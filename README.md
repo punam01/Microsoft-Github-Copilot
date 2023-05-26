@@ -23,6 +23,7 @@ To run this project, you need to have the following:
 
 - Python 3.x installed on your system.
 - An API key from OpenWeatherMap. You can obtain a free API key by signing up on their website.
+- Github Copilot
 
 ## Installation ⬇️
 
