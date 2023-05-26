@@ -140,7 +140,7 @@ class App(customtkinter.CTk):
         self.sidebar_Label_7.grid(row=4, column=0, padx=20, pady=10)
         self.sidebar_Label_8 = customtkinter.CTkLabel(self.current_weather_frame, width=200, text=str(current_weather["country"]),font=customtkinter.CTkFont(size=30, weight="bold"))
         self.sidebar_Label_8.grid(row=1, column=0, padx=20, pady=10)
-
+        
         self.appearance_mode_optionemenu.set("Dark")
         self.scaling_optionemenu.set("100%")      
 
