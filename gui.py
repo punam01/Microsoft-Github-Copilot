@@ -152,23 +152,27 @@ class App(customtkinter.CTk):
         customtkinter.set_appearance_mode(new_appearance_mode)
 
     def weather_search(self):
-        current_weather = tool.get_weather(self.entry.get())
-        self.sidebar_Label_2.configure(text="Latitude: "+current_weather["latitude"])
-        self.sidebar_Label_3.configure(text="Longitude: "+current_weather["longitude"])
-        self.weather_icon.configure(text=current_weather["icon"])
-        self.label_tab_speed.configure(text=current_weather["wind_speed"])
-        self.label_tab_degree.configure(text=current_weather["wind_deg"])
-        self.label_tab_sunrise.configure(text=current_weather["sunrise"])
-        self.label_tab_sunset.configure(text=current_weather["sunset"])
-        self.label_tab_pressure.configure(text=current_weather["current_pressure"])
-        self.label_humidity.configure(text=current_weather["current_humidity"])
-        self.textbox.delete("0.0", END)
-        self.textbox.insert("0.0", "Description of Current Weather\n\n" +current_weather["weather_description"] +"\n\n")        
-        self.sidebar_Label_5.configure(text=current_weather["current_city"].capitalize())
-        self.sidebar_Label_6.configure(text=current_weather["current_temperature"])
-        self.sidebar_Label_7.configure(text=current_weather["current_date_time"])
-        self.sidebar_Label_8.configure(text=current_weather["current_country"])
-        self.entry.delete(0, END)
+        if(self.entry.get() == "" or self.entry.get().isdigit()):
+            tkinter.messagebox.showinfo("Error", "Please enter a city name")
+            return      
+        else:
+            current_weather = tool.get_weather(self.entry.get())
+            self.sidebar_Label_2.configure(text="Latitude: "+current_weather["latitude"])
+            self.sidebar_Label_3.configure(text="Longitude: "+current_weather["longitude"])
+            self.weather_icon.configure(text=current_weather["icon"])
+            self.label_tab_speed.configure(text=current_weather["wind_speed"])
+            self.label_tab_degree.configure(text=current_weather["wind_deg"])
+            self.label_tab_sunrise.configure(text=current_weather["sunrise"])
+            self.label_tab_sunset.configure(text=current_weather["sunset"])
+            self.label_tab_pressure.configure(text=current_weather["current_pressure"])
+            self.label_humidity.configure(text=current_weather["current_humidity"])
+            self.textbox.delete("0.0", END)
+            self.textbox.insert("0.0", "Description of Current Weather\n\n" +current_weather["weather_description"] +"\n\n")        
+            self.sidebar_Label_5.configure(text=current_weather["current_city"].capitalize())
+            self.sidebar_Label_6.configure(text=current_weather["current_temperature"])
+            self.sidebar_Label_7.configure(text=current_weather["current_date_time"])
+            self.sidebar_Label_8.configure(text=current_weather["current_country"])
+            self.entry.delete(0, END)
 
     def change_scaling_event(self, new_scaling: str):
         new_scaling_float = int(new_scaling.replace("%", "")) / 100

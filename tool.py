@@ -28,7 +28,6 @@ sunset=0
 weather_description=""
 current_city=""
 current_country=""
-error=False
 
 #make a dictionary of above variables
 weather_data={
@@ -52,8 +51,7 @@ weather_data={
     "sunset":sunset,
     "weather_description":weather_description,
     "current_city":current_city,
-    "current_country":current_country,
-    "error":error
+    "current_country":current_country
 }
     
 #dictionary to store weather icons
@@ -241,7 +239,7 @@ def get_weather(city):
     complete_url=url+"appid="+api_key+"&q="+city
     response=requests.get(complete_url)
     x=response.json()
-    if x["cod"]=="404" or x["cod"]!="401":
+    if x["cod"]!="404":
         y=x["main"]
         weather_data["min_temperature"]=str(y["temp_min"])+ " K"
         weather_data["max_temperature"]=str(y["temp_max"])+" K"
@@ -285,5 +283,5 @@ def get_weather(city):
             weather_data["current_country"]=city.capitalize()
         return weather_data
     else:
-        return "Cannot find city"
+        return weather_data
 
