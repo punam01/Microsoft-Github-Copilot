@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-=======
+
 # Python Weather Forecasting Tool
 
 This project is a command-line tool and GUI application that accepts a city's name as input and returns the current weather forecast. It leverages the OpenWeatherMap API to fetch weather data and parses it using Python. The project also showcases how GitHub Copilot can assist with API usage, data parsing, and error handling.
@@ -28,4 +27,3 @@ Contributions are welcome! If you'd like to contribute to this project, please f
 - Commit your changes and push the branch to your forked repository.
 - Submit a pull request, explaining your changes and why they should be merged.
 
->>>>>>> 49d3e1f39c835daf7d672745bd8e7967aa8b7e60
