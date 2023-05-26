@@ -235,16 +235,12 @@ def get_date_time(timestamp):
 #function to get weather forecast
 def get_weather(city):
     load_dotenv()
-    print(city)
     url="https://api.openweathermap.org/data/2.5/weather?"
     api_key=str(os.getenv("API_KEY"))
     complete_url=url+"appid="+api_key+"&q="+city
-    print(complete_url)
     response=requests.get(complete_url)
     x=response.json()
-    #handle all error and exceprtion in response
     if x["cod"]=="404" or x["cod"]!="401":
-        print(x)
         y=x["main"]
         weather_data["min_temperature"]=str(y["temp_min"])+ " K"
         weather_data["max_temperature"]=str(y["temp_max"])+" K"
@@ -268,7 +264,6 @@ def get_weather(city):
         weather_data["sunrise"]=str(get_date_time(x["sys"]["sunrise"]))+" IST"
         weather_data["sunset"]=str(get_date_time(x["sys"]["sunset"]))+" IST"
         weather_data["current_city"]=city
-        print(x["coord"])
         coord=x["coord"]
         if(coord["lon"]>0):
             weather_data["longitude"]=str(coord["lon"])
