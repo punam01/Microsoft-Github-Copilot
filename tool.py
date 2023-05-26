@@ -5,54 +5,6 @@ import datetime
 from urllib.request import urlopen 
 import os
 from dotenv import load_dotenv
-
-#declare global varibales
-min_temperature=0
-max_temperature=0
-cloudiness=0
-visibility=0
-icon=""
-weather_description=""
-current_temperature=0
-current_pressure=0
-current_humidity=0
-current_date_time=""
-current_unix_time=0
-city=""
-longitude=""
-latitude=""
-wind_speed=0
-wind_deg=0
-sunrise=0
-sunset=0
-weather_description=""
-current_city=""
-current_country=""
-
-#make a dictionary of above variables
-weather_data={
-    "min_temperature":min_temperature,
-    "max_temperature":max_temperature,
-    "cloudiness":cloudiness,
-    "visibility":visibility,
-    "icon":icon,
-    "weather_description":weather_description,
-    "current_temperature":current_temperature,
-    "current_pressure":current_pressure,
-    "current_humidity":current_humidity,
-    "current_date_time":current_date_time,
-    "current_unix_time":current_unix_time,
-    "city":city,
-    "longitude":longitude,
-    "latitude":latitude,
-    "wind_speed":wind_speed,
-    "wind_deg":wind_deg,
-    "sunrise":sunrise,
-    "sunset":sunset,
-    "weather_description":weather_description,
-    "current_city":current_city,
-    "current_country":current_country
-}
     
 #dictionary to store weather icons
 weather_icons = {
@@ -78,6 +30,7 @@ weather_icons = {
 
 #dictionary for country codes
 country_codes={
+    "KZ":"Kazakhstan",
     "AF":"Afghanistan",
     "AX":"Aland Islands",
     "AL":"Albania",
@@ -101,7 +54,6 @@ country_codes={
     "BY":"Belarus",
     "BE":"Belgium",
     "BZ":"Belize",
-
     "BJ":"Benin",
     "BM":"Bermuda",
     "BT":"Bhutan",
@@ -131,8 +83,6 @@ country_codes={
     "CG":"Congo",
     "CD":"Congo, Democratic Republic",
     "CK":"Cook Islands",
-
-
     "CR":"Costa Rica",
     "CI":"Cote D'Ivoire",
     "HR":"Croatia",
@@ -185,7 +135,142 @@ country_codes={
     "ID":"Indonesia",
     "IR":"Iran, Islamic Republic Of",
     "IQ":"Iraq",
-    "IE":"Ireland"
+    "IE":"Ireland",
+    "RU":"Russia",
+    "AU":"Australia",
+    "IT":"Italy",
+    "JP":"Japan",
+    "KR":"Korea",
+    "KP":"Korea, Democratic People'S Republic Of",
+    "KW":"Kuwait",
+    "KG":"Kyrgyzstan",
+    "LA":"Lao People'S Democratic Republic",
+    "LV":"Latvia",
+    "LB":"Lebanon",
+    "LS":"Lesotho",
+    "LR":"Liberia",
+    "LY":"Libyan Arab Jamahiriya",
+    "LI":"Liechtenstein",
+    "LT":"Lithuania",
+    "LU":"Luxembourg",
+    "MO":"Macao",
+    "MK":"Macedonia",
+    "MG":"Madagascar",
+    "MW":"Malawi",
+    "MY":"Malaysia",
+    "MV":"Maldives",
+    "ML":"Mali",
+    "MT":"Malta",
+    "MH":"Marshall Islands",
+    "MQ":"Martinique",
+    "MR":"Mauritania",
+    "MU":"Mauritius",
+    "YT":"Mayotte",
+    "MX":"Mexico",
+    "FM":"Micronesia, Federated States Of",
+    "MD":"Moldova",
+    "MC":"Monaco",
+    "MN":"Mongolia",
+    "ME":"Montenegro",
+    "MS":"Montserrat",
+    "MA":"Morocco",
+    "MZ":"Mozambique",
+    "MM":"Myanmar",
+    "NA":"Namibia",
+    "NR":"Nauru",
+    "NP":"Nepal",
+    "NL":"Netherlands",
+    "AN":"Netherlands Antilles",
+    "NC":"New Caledonia",
+    "NZ":"New Zealand",
+    "NI":"Nicaragua",
+    "NE":"Niger",
+    "NG":"Nigeria",
+    "NU":"Niue",
+    "NF":"Norfolk Island",
+    "MP":"Northern Mariana Islands",
+    "NO":"Norway",
+    "OM":"Oman",
+    "PK":"Pakistan",
+    "PW":"Palau",
+    "PS":"Palestinian Territory, Occupied",
+    "PA":"Panama",
+    "PG":"Papua New Guinea",
+    "PY":"Paraguay",
+    "PE":"Peru",
+    "PH":"Philippines",
+    "PN":"Pitcairn",
+    "PL":"Poland",
+    "PT":"Portugal",
+    "PR":"Puerto Rico",
+    "QA":"Qatar",
+    "RE":"Reunion",
+    "RO":"Romania",
+    "RW":"Rwanda",
+    "BL":"Saint Barthelemy",
+    "SH":"Saint Helena",
+    "KN":"Saint Kitts And Nevis",
+    "LC":"Saint Lucia",
+    "MF":"Saint Martin",
+    "PM":"Saint Pierre And Miquelon",
+    "VC":"Saint Vincent And Grenadines",
+    "WS":"Samoa",
+    "SM":"San Marino",
+    "ST":"Sao Tome And Principe",
+    "SA":"Saudi Arabia",
+    "SN":"Senegal",
+    "RS":"Serbia",
+    "SC":"Seychelles",
+    "SL":"Sierra Leone",
+    "SG":"Singapore",
+    "SK":"Slovakia",
+    "SI":"Slovenia",
+    "SB":"Solomon Islands",
+    "SO":"Somalia",
+    "ZA":"South Africa",
+    "GS":"South Georgia And Sandwich Isl.",
+    "ES":"Spain",
+    "LK":"Sri Lanka",
+    "SD":"Sudan",
+    "SR":"Suriname",
+    "SJ":"Svalbard And Jan Mayen",
+    "SZ":"Swaziland",
+    "SE":"Sweden",
+    "CH":"Switzerland",
+    "SY":"Syrian Arab Republic",
+    "TW":"Taiwan",
+    "TJ":"Tajikistan",
+    "TZ":"Tanzania",
+    "TH":"Thailand",
+    "TL":"Timor-Leste",
+    "TG":"Togo",
+    "TK":"Tokelau",
+    "TO":"Tonga",
+    "TT":"Trinidad And Tobago",
+    "TN":"Tunisia",
+    "TR":"Turkey",
+    "TM":"Turkmenistan",
+    "TC":"Turks And Caicos Islands",
+    "TV":"Tuvalu",
+    "UG":"Uganda",
+    "UA":"Ukraine",
+    "AE":"United Arab Emirates",
+    "GB":"United Kingdom",
+    "US":"United States",
+    "UM":"United States Outlying Islands",
+    "UY":"Uruguay",
+    "UZ":"Uzbekistan",
+    "VU":"Vanuatu",
+    "VE":"Venezuela",
+    "VN":"Viet Nam",
+    "VG":"Virgin Islands, British",
+    "VI":"Virgin Islands, U.S.",
+    "WF":"Wallis And Futuna",
+    "EH":"Western Sahara",
+    "YE":"Yemen",
+    "ZM":"Zambia",
+    "ZW":"Zimbabwe"
+
 }
 
 #ditionary to store weather description
@@ -231,6 +316,66 @@ def get_date_time(timestamp):
     date=datetime.datetime.fromtimestamp(timestamp)
     return date.strftime('%H:%M:%S \n%A')   
 
+#make a dictionary of above variables
+weather_data={
+    "longitude":"",
+    "latitude":"",
+    "icon":"",
+    "main":"",
+    "weather_description":"",
+    "temp":"",
+    "pressure":"",
+    "humidity":"",
+    "temp_min":"",
+    "temp_max":"",
+    "wind":"",
+    "wind_speed":"",
+    "wind_deg":"",
+    "current_date_time":"",
+    "current_unix_time":"",
+    "sys":"",
+    "sunrise":"",
+    "sunset":"",
+    "country":"",
+    "cod":"", 
+    "name":""
+}
+#function to parse weather api with missing data handling
+def parse_weather_data(response):
+    try:
+        weather_data["longitude"]=response.get("coord",{}).get("lon")
+        weather_data["latitude"]=response.get("coord",{}).get("lat")
+        weather_data["icon"]=weather_icons[response["weather"][0]["icon"]]
+        weather_data["weather_description"]=weather_description[response['weather'][0]['description']]
+        weather_data["main"]=response.get("main")
+        weather_data["temp"]=response.get("main",{}).get("temp")
+        weather_data["pressure"]=response.get("main",{}).get("pressure")
+        weather_data["humidity"]=response.get("main",{}).get("humidity")
+        weather_data["temp_min"]=response.get("main",{}).get("temp_min")
+        weather_data["temp_max"]=response.get("main",{}).get("temp_max")
+        weather_data["wind"]=response.get("wind")
+        weather_data["wind_speed"]=response.get("wind",{}).get("speed")
+        weather_data["wind_deg"]=response.get("wind",{}).get("deg")
+        weather_data["current_unix_time"]=response.get("dt")
+        weather_data["current_date_time"]=get_date_time(weather_data["current_unix_time"])
+        weather_data["sys"]=response.get("sys")
+        weather_data["sunrise"]=get_date_time(response.get("sys",{}).get("sunrise"))
+        weather_data["sunset"]=get_date_time(response.get("sys",{}).get("sunset"))
+        weather_data["country"]=country_codes[response.get("sys",{}).get("country")]
+        weather_data["name"]=response.get("name")
+        weather_data["cod"]=response.get("cod")
+        #handling missing data
+        for key, value in weather_data.items():
+            if value is None:
+                print("Missing data for key: ", key)
+                weather_data[key] = "N/A"  # Replace missing data with "N/A"
+                print("\nReplaced with 'N/A'")
+        print("\nWeather data:", weather_data)    
+        return weather_data
+    except KeyError:
+        print("\nCity Not Found")
+    
+
 #function to get weather forecast
 def get_weather(city):
     load_dotenv()
@@ -238,50 +383,25 @@ def get_weather(city):
     api_key=str(os.getenv("API_KEY"))
     complete_url=url+"appid="+api_key+"&q="+city
     response=requests.get(complete_url)
-    x=response.json()
-    if x["cod"]!="404":
-        y=x["main"]
-        weather_data["min_temperature"]=str(y["temp_min"])+ " K"
-        weather_data["max_temperature"]=str(y["temp_max"])+" K"
-        weather_data["cloudiness"]=str(x["clouds"]["all"])+" %"
-        weather_data["visibility"]=str(x["visibility"])+" m"
-        weather_data["current_temperature"]=str(y["temp"])+" K"
-        weather_data["current_pressure"]=str(y["pressure"])+" hPa"
-        weather_data["current_humidity"]=str(y["humidity"])+" %"
-        weather_data["current_unix_time"]=x["dt"]
-        weather_data["current_date_time"]=str(get_date_time(weather_data["current_unix_time"]))+" IST"
-        z=x["weather"]
-        i=z[0]["icon"]
-        weather_data["icon"]=weather_icons[i] 
-        if(str(z[0]["description"]) in weather_description.keys()):       
-            weather_data["weather_description"]=weather_description[str(z[0]["description"])]
-        else:
-            weather_data["weather_description"]="Not Available"
-        wind=x["wind"]
-        weather_data["wind_speed"]=str(wind["speed"])+" m/s"
-        weather_data["wind_deg"]=str(wind["deg"])+" deg"
-        weather_data["sunrise"]=str(get_date_time(x["sys"]["sunrise"]))+" IST"
-        weather_data["sunset"]=str(get_date_time(x["sys"]["sunset"]))+" IST"
-        weather_data["current_city"]=city
-        coord=x["coord"]
-        if(coord["lon"]>0):
-            weather_data["longitude"]=str(coord["lon"])
-        else:
-            weather_data["longitude"]="Not Available"
-        if(coord["lat"]>0):
-            weather_data["latitude"]=str(coord["lat"])
-        else:
-            weather_data["latitude"]="Not Available"
-        a=x["sys"]
-        country = a.get("country", "Unknown")
-        if(country!="Unknown"):
-                if(country in country_codes.keys()):
-                    weather_data["current_country"]=country_codes[x["sys"]["country"]]
-                else:
-                    weather_data["current_country"]=country.capitalize()
-        else:
-            weather_data["current_country"]=city.capitalize()
-        return weather_data
-    else:
-        return weather_data
+    ans=parse_weather_data(response.json())
+    return ans
 
+#function to get weather forecast menu driven
+def main():
+    while True:
+        print("\n\n\n1. Fetch weather information")
+        print("2. Exit")
+
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            city = input("Enter a city name: ")
+            get_weather(city)
+        elif choice == "2":
+            print("Exiting...")
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+    main()
