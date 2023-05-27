@@ -27,7 +27,6 @@ weather_icons = {
     '50d': '🌫️',  # Mist
     '50n': '🌫️',  # Mist
 }
-
 #dictionary for country codes
 country_codes={
     "KZ":"Kazakhstan",
@@ -370,7 +369,6 @@ def parse_weather_data(response):
                 print("Missing data for key: ", key)
                 weather_data[key] = "N/A"  # Replace missing data with "N/A"
                 print("\nReplaced with 'N/A'")
-        print("\nWeather data:", weather_data)    
         return weather_data
     except KeyError:
         print("\nCity Not Found")  
@@ -397,14 +395,20 @@ def get_weather(city):
 #function to get weather forecast menu driven
 def main():
     while True:
-        print("\n\n\n1. Fetch weather information")
+        print("\n1. Fetch weather information")
         print("2. Exit")
 
         choice = input("Enter your choice: ")
 
         if choice == "1":
             city = input("Enter a city name: ")
-            get_weather(city)
+            data=get_weather(city)
+            if data is None:
+                continue
+            print("\nAll standard units are in SI units\n")
+            for key, value in data.items():
+                print(key, ":", value)
+                print("\n------------")
             plot_graph()
         elif choice == "2":
             print("Exiting...")
