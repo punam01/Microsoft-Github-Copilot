@@ -1,0 +1,17 @@
+:root{
+    --col-pink:#F8CEEF;
+    --col-yellow:#FFC533;
+    --col-black:#131517;
+    --col-white:#FFFFFF;
+    --col-blue:#91FFF7;
+    --col-gray:#8C8C8E;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    background-color: var(--col-pink);
+}
+.container{
+    
+}
