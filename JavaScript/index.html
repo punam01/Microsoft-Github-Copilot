@@ -16,6 +16,12 @@
       href="https://fonts.googleapis.com/css2?family=Sigmar&display=swap"
       rel="stylesheet"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@200;300&display=swap"
+      rel="stylesheet"
+    />
     <title>TrackerExpense</title>
   </head>
   <body>
@@ -39,14 +45,28 @@
         <div class="top-left-section">
           <div class="left-section-header">
             <h1>ALL INVESTMENTS</h1>
-            <p>Track your expenses</p>
+            <p>Total Investments</p>
+            <p class="amount">$53,07,578</p>
+            <!--add image graph from images folder-->
+            <img class="graph" src="images/graph.png" alt="graph" />
           </div>
         </div>
         <!--MY CARDS-->
         <div class="top-right-section">
           <div class="left-section-header">
             <h1>MY CARDS</h1>
-            <p>Track your expenses</p>
+            <p>Add or manage cards</p>
+            <!--make a card shape box-->
+            <div class="card">
+              <!--add image of card
+              <img src="images/card.png" alt="card" />-->
+              <!--add card number-->
+              <p class="card-number">**** **** **** 1234</p>
+              <!--add card name-->
+              <p class="card-name">John Doe</p>
+              <!--add card expiry date-->
+              <p class="card-expiry">12/24</p>
+            </div>
           </div>
         </div>
         <!--ALL EXPENSES-->
@@ -70,17 +90,11 @@
       <footer>
         <div class="footer">
           <div class="footer-left">
-            <h1>TrackerExpense</h1>
-            <p>Track your expenses</p>
+            <small>TrackerExpense</small>
+            <small>Track your expenses</small>
           </div>
           <div class="footer-right">
-            <h1>Follow Us</h1>
-            <div class="social-media">
-              <a href="#"><i class="fab fa-facebook-f"></i></a>
-              <a href="#"><i class="fab fa-instagram"></i></a>
-              <a href="#"><i class="fab fa-twitter"></i></a>
-            </div>
-            <p>© 2021 TrackerExpense. All rights reserved.</p>
+            <small>© 2021 TrackerExpense. All rights reserved.</small>
           </div>
         </div>
       </footer>
