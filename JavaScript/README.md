@@ -1,7 +1,5 @@
 # Expense Tracker Web Application
 
-![Expense Tracker]
-
 The Expense Tracker Web Application is a tool designed to assist users in managing their expenses, tracking investments with graphical representations, adding and managing cards, and making quick payments. This web app provides a convenient and user-friendly interface for users to monitor their financial transactions and gain insights into their spending habits.
 
 ## Features
