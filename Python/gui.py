@@ -8,7 +8,6 @@ customtkinter.set_default_color_theme("blue")
 
 city = tool.get_location()
 current_weather = tool.get_weather(city)
-
 # create main window
 class App(customtkinter.CTk):
     def __init__(self):
@@ -46,6 +45,9 @@ class App(customtkinter.CTk):
         self.weather_icon = customtkinter.CTkLabel(self.sidebar_frame, text=current_weather["icon"], font=customtkinter.CTkFont(size=70, weight="bold"), wraplength=20)
         self.weather_icon.grid(row=4, column=0, padx=20, pady=10)
         
+        self.weather_graph_button = customtkinter.CTkButton(self.sidebar_frame, text="👀 Weather Graph", fg_color="transparent", bg_color="#4287f5", hover_color="#4287f5", command=self.display_graph)
+        self.weather_graph_button.grid(row=5, column=0, padx=20, pady=10)
+
         self.appearance_mode_label = customtkinter.CTkLabel(self.sidebar_frame, text="Appearance Mode:", anchor="w")
         self.appearance_mode_label.grid(row=6, column=0, padx=20, pady=(10, 0))
 
@@ -196,7 +198,10 @@ class App(customtkinter.CTk):
             else:
                 tkinter.messagebox.showinfo("Message", "It is a good day to go outside")
                 return
-
+            
+    # function to display graph
+    def display_graph(self):
+        tool.plot_graph()
     def change_scaling_event(self, new_scaling: str):
         new_scaling_float = int(new_scaling.replace("%", "")) / 100
         customtkinter.set_widget_scaling(new_scaling_float)

@@ -5,7 +5,7 @@ import datetime
 from urllib.request import urlopen 
 import os
 from dotenv import load_dotenv
-import speech_recognition as sr
+
 #dictionary to store weather icons
 weather_icons = {
     '01d': '☀️',  # Sunny
@@ -373,14 +373,22 @@ def parse_weather_data(response):
     except KeyError:
         print("\nCity Not Found")  
 
-
 #function to plaot graph for weather proper x and y
 def plot_graph():
     import matplotlib.pyplot as plt
+    if plt.fignum_exists("Weather Forecast"):
+        plt.clf()
+    plt.figure("Weather Forecast")
+    plt.title(weather_data["name"])
+    #label x axis and y axis
+    plt.xlabel("Weather Parameters")
+    plt.ylabel("Standard Units")
+    #plot graph
     x=["temp","pressure","humidity","temp_min","temp_max","wind_speed","wind_deg"]
     y=[weather_data["temp"],weather_data["pressure"],weather_data["humidity"],weather_data["temp_min"],weather_data["temp_max"],weather_data["wind_speed"],weather_data["wind_deg"]]
     plt.plot(x,y)
     plt.show()
+
 #function to get weather forecast
 def get_weather(city):
     load_dotenv()
@@ -390,7 +398,6 @@ def get_weather(city):
     response=requests.get(complete_url)
     ans=parse_weather_data(response.json())
     return ans
-
         
 #function to get weather forecast menu driven
 def main():
