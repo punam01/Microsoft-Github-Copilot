@@ -4,19 +4,13 @@
 This project is a command-line tool and GUI application that accepts a city's name as input and returns the current weather forecast. It leverages the OpenWeatherMap API to fetch weather data and parses it using Python. The project also showcases how GitHub Copilot can assist with API usage, data parsing, and error handling.
 
 ## [Presentation](https://www.canva.com/design/DAFkAUiEUt4/SCaFxYAckvbuxsmU3gn1Vw/edit?utm_content=DAFkAUiEUt4&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton) 
+[Uploading M-G-C-Hackathon.pptx…]()
 
 ```
 Proposed Solution + Usage of Github Copilot +High level architecture, supporting diagrams etc
 ```
 ## Video
-
-
-
-
-
-
-
-https://github.com/punam01/Microsoft-Github-Copilot-Hackathon/assets/43836363/30b2789f-34cc-4a4e-88a6-245fe2650412
+https://github.com/punam01/Microsoft-Github-Copilot/assets/43836363/a2f5aa3b-0ef3-489b-ae87-01a2d1c945ab
 
 ## Features 
 
