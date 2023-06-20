@@ -178,25 +178,25 @@ class App(customtkinter.CTk):
             self.entry.delete(0, END)
             #suggesting user to stay indoors if weather is not good
             if(current_weather["temp"] > 300):
-                tkinter.messagebox.showinfo("Warning", "It is too hot outside, you should stay indoors")
+                tkinter.messagebox.showinfo("Warning", "It is too hot 🥵 outside, you should stay indoors")
                 return
             elif(current_weather["temp"] < 280):
-                tkinter.messagebox.showinfo("Warning", "It is too cold outside, you should stay indoors")
+                tkinter.messagebox.showinfo("Warning", "It is too cold 🥶 outside, you should stay indoors")
                 return
             elif(current_weather["humidity"] > 80):
-                tkinter.messagebox.showinfo("Warning", "It is too humid outside, you should stay indoors")
+                tkinter.messagebox.showinfo("Warning", "It is too humid 🥴 outside, you should stay indoors")
                 return
             elif(current_weather["humidity"] < 20):
-                tkinter.messagebox.showinfo("Warning", "It is too dry outside, you should stay indoors")
+                tkinter.messagebox.showinfo("Warning", "It is too dry 🌵 outside, you should stay indoors")
                 return
             elif(current_weather["pressure"] > 1013):
-                tkinter.messagebox.showinfo("Warning", "It is too high pressure outside, you should stay indoors")
+                tkinter.messagebox.showinfo("Warning", "It is too high pressure 😮‍💨 outside, you should stay indoors")
                 return
             elif(current_weather["pressure"] < 1000):
-                tkinter.messagebox.showinfo("Warning", "It is too low pressure outside, you should stay indoors")
+                tkinter.messagebox.showinfo("Warning", "It is too low pressure 🔋 outside, you should stay indoors")
                 return
             else:
-                tkinter.messagebox.showinfo("Message", "It is a good day to go outside")
+                tkinter.messagebox.showinfo("Message", "It is a good day to go outside 😃")
                 return
             
     # function to display graph
