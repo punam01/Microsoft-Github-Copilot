@@ -22,6 +22,8 @@ class App(customtkinter.CTk):
         self.grid_columnconfigure(1, weight=1)
         self.grid_columnconfigure((2, 3), weight=0)
         self.grid_rowconfigure((0, 1, 2), weight=1)
+        #set tile icon use 
+        self.iconbitmap("./images/icon.ico")
 
         # create sidebar frame with widgets
         self.sidebar_frame = customtkinter.CTkFrame(self, width=140, corner_radius=0)
@@ -59,7 +61,7 @@ class App(customtkinter.CTk):
         self.entry = customtkinter.CTkEntry(self, placeholder_text="Search City here....")
         self.entry.grid(row=3, column=1, columnspan=2, padx=(20, 0), pady=(20, 20), sticky="nsew")
 
-        self.main_button_search = customtkinter.CTkButton(master=self, fg_color="transparent", bg_color="#4287f5", text="Search", hover_color="#4287f5", corner_radius=2, command=self.weather_search)
+        self.main_button_search = customtkinter.CTkButton(master=self, fg_color="transparent", bg_color="#4287f5", text="Search", hover_color="#4287f5",command=self.weather_search)
         self.main_button_search.grid(row=3, column=3, padx=(20, 20), pady=(20, 20), sticky="nsew")
 
         self.textbox_desc = customtkinter.CTkTextbox(self, width=250)
@@ -129,7 +131,7 @@ class App(customtkinter.CTk):
         self.current_weather_frame.grid(row=1, column=1, columnspan=2, padx=(20, 0), pady=(20, 0), sticky="nsew")
         self.current_weather_frame.grid_rowconfigure(4, weight=1)
         self.current_weather_frame.grid_columnconfigure(0, weight=1)
-        self.current_weather_label = customtkinter.CTkLabel(self.current_weather_frame, text="Current Weather", font=customtkinter.CTkFont(size=20, weight="bold"))
+        self.current_weather_label = customtkinter.CTkLabel(self.current_weather_frame, bg_color="#4287f5", text="Current Weather", font=customtkinter.CTkFont(size=15, weight="bold"))
         self.current_weather_label.grid(row=0, column=0, padx=20, pady=(20, 10))
         self.sidebar_Label_city = customtkinter.CTkLabel(self.current_weather_frame, width=200, text=str(current_weather["name"]).capitalize(),font=customtkinter.CTkFont(size=30, weight="bold"))
         self.sidebar_Label_city.grid(row=2, column=0, padx=20, pady=10)
@@ -146,7 +148,7 @@ class App(customtkinter.CTk):
 
     def change_appearance_mode_event(self, new_appearance_mode: str):
         customtkinter.set_appearance_mode(new_appearance_mode)
-
+            
     def weather_search(self):
         if(self.entry.get() == "" or self.entry.get().isdigit()):
             tkinter.messagebox.showinfo("Error", "Please enter a city name")
@@ -172,11 +174,34 @@ class App(customtkinter.CTk):
             self.sidebar_Label_date.configure(text=str(current_weather["current_date_time"])+" IST")
             self.sidebar_Label_country.configure(text=current_weather["country"])
             self.entry.delete(0, END)
+            #suggesting user to stay indoors if weather is not good
+            if(current_weather["temp"] > 300):
+                tkinter.messagebox.showinfo("Warning", "It is too hot outside, you should stay indoors")
+                return
+            elif(current_weather["temp"] < 280):
+                tkinter.messagebox.showinfo("Warning", "It is too cold outside, you should stay indoors")
+                return
+            elif(current_weather["humidity"] > 80):
+                tkinter.messagebox.showinfo("Warning", "It is too humid outside, you should stay indoors")
+                return
+            elif(current_weather["humidity"] < 20):
+                tkinter.messagebox.showinfo("Warning", "It is too dry outside, you should stay indoors")
+                return
+            elif(current_weather["pressure"] > 1013):
+                tkinter.messagebox.showinfo("Warning", "It is too high pressure outside, you should stay indoors")
+                return
+            elif(current_weather["pressure"] < 1000):
+                tkinter.messagebox.showinfo("Warning", "It is too low pressure outside, you should stay indoors")
+                return
+            else:
+                tkinter.messagebox.showinfo("Message", "It is a good day to go outside")
+                return
 
     def change_scaling_event(self, new_scaling: str):
         new_scaling_float = int(new_scaling.replace("%", "")) / 100
         customtkinter.set_widget_scaling(new_scaling_float)
 
+        
 
 if __name__ == "__main__":
     app = App()
