@@ -1,39 +1,3 @@
-# **sdfghnmjk**
-
-> *asdfghj*
-
-
-1. [Description](#description)
-2. [Installation](#installation)
-3. [Features](#features)
-4. [Tech Used](#tech-used)
-5. [Getting Started](#getting-started)
-6. [Contribute](#contribute)
-7. [License](#license)
-
-
-## Description
-sdfghj
-
-## Installation
-```
-sdfghjk
-```
-
-## Features
-asdfghj
-
-## Tech Used
-Front-end: React.js, HTML, CSS Back-end: Node.js, Express.js Database: MongoDB Authentication: JWT (JSON Web Tokens)
-
-## Getting Started
-GETTING STARTED
-
-## Contribute
-Fork the Repository,Clone the Forked Repository, Create a New Branch,Make Your Contributions,Commit and Push Changes,Create a Pull Request!
-
-## License
-zxc 
 
 # Python Weather Forecasting Tool 🌧️
 
